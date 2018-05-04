@@ -3,37 +3,31 @@ import sys
 check_lst = []
 length = len(sys.argv)
 argv = sys.argv[1:length]
-lest=0
+flag=0
+#flag: Nが割り切れたら1
 
-for i, word in enumerate(argv):
-    if i == length-2:
-        N = word
-        try:
-            N=int(N)
-        except ValueError:
-            print("pls type int")
-            break
-    else:
-        strlst = word.split(":")
-        try:
+try:
+    for i, word in enumerate(argv):
+        if i == length-2:
+            N = word
+            N = int(N)
+        else:
+            strlst = word.split(":")
             check_lst.append(strlst)
-        except ValueError:
-            print("pls type int")
-            sys.exit()
-        #check_strlst.append(strlst[1])
 
-for check in check_lst:
-    try:
+    for check in check_lst:
         i = int(check[0])
-    except ValueError:
-        print("pls type int")
-        sys.exit()
+        if N % i == 0:
+            print("{0}".format(check[1]), end="")
+            flag = 1
 
-    if N % i == 0:
-        print("{0}".format(check[1]), end="")
-        lest = 1
+    if flag == 0:
+        print("{0}".format(N))
 
-if lest == 0:
-    print("{0}".format(N), end="")
+    else:
+        print("!")
 
-print()
+except ValueError:
+    print("pls type int")
+    sys.exit()
+    #整数以外のものが与えられたら終了
